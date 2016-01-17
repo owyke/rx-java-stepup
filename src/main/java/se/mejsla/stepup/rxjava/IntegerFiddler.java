@@ -1,8 +1,6 @@
 package se.mejsla.stepup.rxjava;
 
-import javafx.util.Pair;
 import rx.Observable;
-import rx.Subscriber;
 
 
 public class IntegerFiddler {
@@ -20,13 +18,11 @@ public class IntegerFiddler {
 
     public Observable sortIntegers(Observable<Integer> o1, Observable<Integer> o2) {
         return o1.mergeWith(o2).toSortedList();
-
-
     }
 
     public Observable getEvens(Observable<Integer> o1, Observable<Integer> o2) {
         return o1.mergeWith(o2).filter((i) -> i % 2 == 0);
-
-
     }
 }
+
+

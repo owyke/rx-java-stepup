@@ -37,7 +37,7 @@ public class IntegerFiddlerTest {
 
     @Test
     public void sortIntegers() throws Exception {
-        List<Integer> ints
+//        List<Integer> ints
         Observable result = instance.sortIntegers(Observable.just(9,3,7,34,5,23), Observable.just(6,17,31,43,33,8));
         TestSubscriber testSubscriber = new TestSubscriber();
         result.subscribe(testSubscriber);
