@@ -13,6 +13,7 @@ Om ett program fortplantar alla förändingar som modifierar dess data till ber�
 Vad händer när `b` uppdateras? Skillnaden mellan imperativ och reaktiv programmering.
 
 ### Varför
+
 Reaktiv programmering möjligggör, gör det lättare att XXX.
 
 
@@ -26,6 +27,7 @@ Ni kanske har hört om [The Reactive Manifesto](http://www.reactivemanifesto.org
 
 ## RxJava
 RxJava är ett Java-bibliotek som tillhandahåller komponenter för att skriva reaktiv kod i Java.
+Vid hantering av mer än en händelse eller asynkront beräkning blir det lätt rörigt för att hålla koll på vad som har skett och ordningen.
 
 
 - Synkront
@@ -71,3 +73,10 @@ Errors terminate the _Observable_ chain of actions.
 _return*_, _retry*_ and _resume*_ will allow you to  execute some logic isntead of failing the program.
 
 
+### What else is there in RxJava
+- Schedulers
+- Parallelism
+- Buffering, Throttling, Debouncing
+- Resource Management
+- Observable.cache
+- Custom Operators
