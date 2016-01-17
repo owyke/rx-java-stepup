@@ -17,7 +17,7 @@ public class IntegerFiddler {
 
 
     public Observable sortIntegers(Observable<Integer> o1, Observable<Integer> o2) {
-        return o1.mergeWith(o2).toSortedList();
+        return o1.mergeWith(o2).toSortedList().flatMap(list -> Observable.from(list));
     }
 
     public Observable getEvens(Observable<Integer> o1, Observable<Integer> o2) {

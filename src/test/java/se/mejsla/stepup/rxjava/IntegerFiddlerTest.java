@@ -5,6 +5,7 @@ import rx.Observable;
 import rx.observers.TestSubscriber;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -37,11 +38,16 @@ public class IntegerFiddlerTest {
 
     @Test
     public void sortIntegers() throws Exception {
-//        List<Integer> ints
-        Observable result = instance.sortIntegers(Observable.just(9,3,7,34,5,23), Observable.just(6,17,31,43,33,8));
+
+        List<Integer> ints = createListOfIntegers(10);
+        Observable result = instance.sortIntegers(Observable.from(ints.subList(0,5)), Observable.from(ints.subList(5,10)));
+
         TestSubscriber testSubscriber = new TestSubscriber();
         result.subscribe(testSubscriber);
-        testSubscriber.assertReceivedOnNext(Arrays.asList(0,6,6,82));
+        testSubscriber.awaitTerminalEvent();
+
+        Collections.sort(ints);
+        testSubscriber.assertReceivedOnNext(ints);
         testSubscriber.assertCompleted();
     }
 
