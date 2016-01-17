@@ -1,6 +1,7 @@
 package se.mejsla.stepup.rxjava;
 
 import rx.Observable;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Action1;
 
@@ -15,7 +16,9 @@ public class ScratchKrilof {
 //        iterableVsObservable();
 //        streamVsObservable();
 //        intervalAndUnsubscribe();
-        switchMap();
+//        switchMap();
+//        errors();
+        retry();
     }
 
     private static void iterableVsObservable() {
@@ -71,6 +74,42 @@ public class ScratchKrilof {
                                 .map(u -> String.format("Observable <%s> : %s", (v + 1), (u))));
         stringObservable.subscribe(System.out::println);
         Thread.sleep(160);
+    }
+
+    private static void errors() {
+        Observable<Integer> numbers = Observable
+                .just("1", "2", "three", "4", "5")
+                .map(Integer::parseInt);
+//                .onErrorResumeNext(throwable -> Observable.just(-2));
+//                .onErrorReturn(throwable -> -1);
+//        numbers.subscribe(System.out::println);
+        numbers.subscribe(
+                System.out::println,
+                throwable -> System.out.println("oops"),
+                () -> System.out.println("Done"));
+    }
+
+    public static void retry() {
+        Observable<Object> observable = Observable.create(new Observable.OnSubscribe<Object>() {
+            int countDown = 2;
+
+            @Override
+            public void call(Subscriber<? super Object> subscriber) {
+                subscriber.onNext(1);
+                subscriber.onNext(2);
+                if (countDown > 0) {
+                    countDown--;
+                    subscriber.onError(new RuntimeException("BooHoo!"));
+                    return;
+                }
+                subscriber.onNext(3);
+            }
+        });
+
+        //observable.subscribe(System.out::println);
+        observable.retry(2).subscribe(System.out::println);
+
+
     }
 
 

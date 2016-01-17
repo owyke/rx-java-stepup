@@ -24,7 +24,7 @@ Reaktiv programmering möjligggör, gör det lättare att XXX.
 
 Ni kanske har hört om [The Reactive Manifesto](http://www.reactivemanifesto.org) som definierar dessa fyra principer.
 
-### RxJava
+## RxJava
 RxJava är ett Java-bibliotek som tillhandahåller komponenter för att skriva reaktiv kod i Java.
 
 
@@ -46,26 +46,28 @@ En Observable ger trycks (push) värden ut när de finns tillgängliga.
 XXX
 
 
-<---------------------->
-# Transformations
+### Transformations
 - flatMap vs concatMap
 - switchMap
 - groupBy
 
-# Accumulating
+### Accumulating
 - scan
 
 
-# combining
+### combining
 - combineLatest
 - concat
 - amb
 - zipWith
 - mergeWith
-takeUntil
-takeWhile
-skipUntil
-skipWhile
+- (takeUntil)
+- (takeWhile)
+- (skipUntil)
+- (skipWhile)
 
 ## Error Handling
-TODO
+Errors terminate the _Observable_ chain of actions.
+_return*_, _retry*_ and _resume*_ will allow you to  execute some logic isntead of failing the program.
+
+
