@@ -5,10 +5,7 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Action1;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class ScratchKrilof {
@@ -16,9 +13,9 @@ public class ScratchKrilof {
 //        iterableVsObservable();
 //        streamVsObservable();
 //        intervalAndUnsubscribe();
-//        switchMap();
+        switchMap();
 //        errors();
-        retry();
+//        retry();
     }
 
     private static void iterableVsObservable() {
@@ -59,11 +56,12 @@ public class ScratchKrilof {
     }
 
     private static void intervalAndUnsubscribe() throws InterruptedException {
-        Observable<Long> interval = Observable.interval(40L, TimeUnit.MILLISECONDS);
+        Observable<Long> interval = Observable.interval(500L, TimeUnit.MILLISECONDS);
         Subscription subscribe = interval.subscribe(System.out::println);
-        Thread.sleep(160);
-        subscribe.unsubscribe();
-        Thread.sleep(160);
+        Thread.sleep(1700);
+//        subscribe.unsubscribe();
+//        System.out.println("unsubscribing");
+//        Thread.sleep(5000);
         System.out.println("Done");
     }
 

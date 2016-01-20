@@ -5,10 +5,9 @@ import org.junit.Test;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
-import java.util.Arrays;
+import static org.junit.Assert.*;
 
-public class AccumulatingTest {
-
+public class Lab1Test {
 
     TestSubscriber<Object> testSubscriber;
 
@@ -18,11 +17,11 @@ public class AccumulatingTest {
     }
 
     @Test
-    public void scan() {
-        Observable<Integer> scanning = Accumulating.multiplying(Observable.just(1, 2, 3, 4, 5));
-        scanning.subscribe(testSubscriber);
-        testSubscriber.assertReceivedOnNext(Arrays.asList(1, 2, 6, 24, 120));
+    public void helloMapTest() {
+        Observable<String> observable = Lab1.helloMap(Observable.just("Jane Doe"));
+
+        observable.subscribe(testSubscriber);
+        testSubscriber.assertValue("Hello Jane Doe");
         testSubscriber.assertCompleted();
     }
-
 }

@@ -35,6 +35,5 @@ public class Scratch {
     private static void observeEm(Iterable<Integer> ints, Action1<Integer> elementHandler, Action1<Throwable> errorHandler, Action0 finishedHandler) {
         Observable.from(ints)
                 .subscribe(elementHandler, errorHandler, finishedHandler);
-
     }
 }
