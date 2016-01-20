@@ -1,13 +1,11 @@
-package se.mejsla.stepup.rxjava.contract;
+package se.mejsla.stepup.rxjava.lab2;
 
 import org.junit.Before;
 import org.junit.Test;
 import rx.Observable;
-import rx.observables.ConnectableObservable;
 import rx.observers.TestSubscriber;
 
 import java.util.Arrays;
-import java.util.function.Supplier;
 
 public class ObservableContractTest {
 
@@ -28,7 +26,7 @@ public class ObservableContractTest {
     @Test
     public void expectOnNextEventAndCompletedEvent() {
 
-        final Observable observable = ObservableFactory.fromSuppliers(() -> 5);
+        final Observable observable = MyObservableFactory.fromSuppliers(() -> 5);
         observable.unsafeSubscribe(testSubscriber);
         testSubscriber.assertReceivedOnNext(Arrays.asList(5));
         testSubscriber.assertCompleted();
@@ -44,7 +42,7 @@ public class ObservableContractTest {
      */
     @Test
     public void expectTwoOnNextEventsAndCompletedEvent()  {
-        final Observable observable = ObservableFactory.fromSuppliers(() -> 2, () -> 4);
+        final Observable observable = MyObservableFactory.fromSuppliers(() -> 2, () -> 4);
         observable.unsafeSubscribe(testSubscriber);
         testSubscriber.assertReceivedOnNext(Arrays.asList(2, 4));
         testSubscriber.assertCompleted();
@@ -64,7 +62,7 @@ public class ObservableContractTest {
      */
     @Test
     public void expectVerySpecialExceptionOnErrorEvent() {
-        final Observable observable = ObservableFactory.fromSuppliers(() -> {
+        final Observable observable = MyObservableFactory.fromSuppliers(() -> {
             throw new RuntimeException();
         });
         observable.unsafeSubscribe(testSubscriber);
@@ -84,7 +82,7 @@ public class ObservableContractTest {
      */
     @Test
     public void expectOnNextEventAndVerySpecialExcpetionOnErrorEvent() {
-        final Observable observable = ObservableFactory.fromSuppliers(() -> 2, () -> {
+        final Observable observable = MyObservableFactory.fromSuppliers(() -> 2, () -> {
             throw new RuntimeException();
         });
         observable.unsafeSubscribe(testSubscriber);
@@ -106,7 +104,7 @@ public class ObservableContractTest {
      */
     @Test
     public void assertNoNextEventAfterError() {
-        final Observable observable = ObservableFactory.fromSuppliers(() -> {
+        final Observable observable = MyObservableFactory.fromSuppliers(() -> {
             throw new RuntimeException();
         }, () -> 2);
         observable.unsafeSubscribe(testSubscriber);
@@ -124,7 +122,7 @@ public class ObservableContractTest {
      */
     @Test(expected = RuntimeException.class)
     public void testSubscriberThrowsShouldPropagate() {
-        final Observable observable = ObservableFactory.fromSuppliers(() -> 2);
+        final Observable observable = MyObservableFactory.fromSuppliers(() -> 2);
         observable.subscribe(o -> {throw new RuntimeException();});
 
     }
